@@ -1,0 +1,15 @@
+openai
+httpx[http2]
+numpy
+scikit-learn
+loguru
+tqdm
+tenacity
+json-repair
+umap-learn
+matplotlib
+scipy
+torch
+vllm>=0.18
+transformers
+faiss-gpu-cu12
