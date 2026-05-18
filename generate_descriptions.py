@@ -15,17 +15,18 @@ USER_BEHAVIOR_FACETS = ["requests_facet", "responses_facet", "context_facet", "c
 def load_conversations(input_file: str, source_type: str) -> list[dict]:
     """Load conversations from a JSONL file.
 
-    source_type="real" uses the original 'messages' field.
-    source_type="simulated" swaps 'simulated_conversation' into 'messages'.
+    source_type="real" uses 'real_messages'.
+    source_type="simulated" uses 'simulated_messages'.
+    Both are normalized to a 'messages' key for downstream code.
     """
+    key = "real_messages" if source_type == "real" else "simulated_messages"
     conversations = []
     with open(input_file) as f:
         for line in f:
             if not line.strip():
                 continue
             entry = json.loads(line)
-            if source_type == "simulated" and "simulated_conversation" in entry:
-                entry = {**entry, "messages": entry["simulated_conversation"]}
+            entry["messages"] = entry[key]
             conversations.append(entry)
     logger.info(f"Loaded {len(conversations)} conversations (type={source_type})")
     return conversations

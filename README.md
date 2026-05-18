@@ -3,6 +3,7 @@
 # Measuring and Mitigating the Distributional Gap Between Real and Simulated User Behaviors
 
 [![Paper](https://img.shields.io/badge/arXiv-Paper-b31b1b.svg)](https://arxiv.org/abs/2605.07847)
+[![Dataset](https://img.shields.io/badge/HuggingFace-Dataset-ffd21e.svg)](https://huggingface.co/datasets/shuhaibmehri/UserBehavioralDivergence-simulated-conversations)
 [![License](https://img.shields.io/badge/license-Apache%202.0-green.svg)](LICENSE)
 
 </div>
@@ -17,6 +18,22 @@ This repository contains the code and data for **Measuring and Mitigating the Di
 
 Our method extracts representations of user behavior from real and simulated conversations, then quantizes them via k-means to get discrete behavioral distributions. This figure presents UMAP projections and first principal component histograms for Gemini 3.1 Pro and Llama-3.1-8B-Instruct on the coding task. We can see that Gemini 3.1 Pro overlaps real users more closely compared to Llama-3.1-8B-Instruct.
 
+
+---
+
+## Data
+
+The simulated conversation data used in our experiments is available on HuggingFace: [shuhaibmehri/UserBehavioralDivergence-simulated-conversations](https://huggingface.co/datasets/shuhaibmehri/UserBehavioralDivergence-simulated-conversations).
+
+Each JSONL file contains conversations for a specific user simulator model on either the coding or writing task. Every record has the following fields:
+
+| Field | Description |
+|-------|-------------|
+| `id` | Unique conversation identifier (shared across real and simulated) |
+| `real_messages` | The original conversation from WildChat |
+| `simulated_messages` | The corresponding simulated conversation |
+
+The dataset covers 25 user simulator models (7 closed-source, 16 open-source, 2 trained simulators) with 5,000 conversations each for coding and writing tasks.
 
 ---
 
